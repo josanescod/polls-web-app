@@ -1,5 +1,8 @@
 <script>
+  import { createEventDispatcher } from "svelte";
   import Button from "../shared/Button.svelte";
+
+  let dispatch = createEventDispatcher();
   let fields = {
     question: "",
     answerA: "",
@@ -32,16 +35,21 @@
       errors.answerA = "";
     }
     // validate answer B
-    if (fields.answerB.trim().length < 5) {
+    if (fields.answerB.trim().length < 1) {
       valid = false;
       errors.answerB = "Answer B cannot be empty.";
     } else {
       errors.answerB = "";
     }
-
     // add new poll
     if (valid) {
-      console.log("valid", fields);
+      let poll = {
+        ...fields,
+        votesA: 0,
+        votesB: 0,
+        id: Math.random(),
+      };
+      dispatch("add", poll);
     }
   };
 </script>
@@ -71,21 +79,17 @@
     margin: 0 auto;
     text-align: center;
   }
-
   .form-field {
     margin: 18px auto;
   }
-
   input {
     width: 100%;
     border-radius: 6px;
   }
-
   label {
     margin: 10px auto;
     text-align: left;
   }
-
   .error {
     color: #d91b42;
     font-size: small;
