@@ -3,7 +3,7 @@
 
 <header>
   <h1>
-    <img src="/img/logo_poll.png" alt="Poll Logo" />
+    <img src="./img/logo_poll.png" alt="Poll Logo" />
   </h1>
 </header>
 
